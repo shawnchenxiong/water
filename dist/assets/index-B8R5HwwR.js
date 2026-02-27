@@ -1,0 +1,1 @@
+import{P as e}from"./ProcessPage-Bxm8TP5p.js";import{v as r,z as o,y as s}from"./vue-vendor-rN4MnI8P.js";import"./DeviceMonitorLayout-DiWI89lf.js";import"./element-plus-DRxKY1eL.js";import"./_plugin-vue_export-helper-DlAUqK2U.js";const f=r({__name:"index",setup(a){return(t,c)=>(s(),o(e,{processId:"secondary-clarifier",processName:"二沉池及出水"}))}});export{f as default};

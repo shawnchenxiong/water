@@ -1,0 +1,1 @@
+import{P as e}from"./ProcessPage-Bxm8TP5p.js";import{v as o,z as r,y as s}from"./vue-vendor-rN4MnI8P.js";import"./DeviceMonitorLayout-DiWI89lf.js";import"./element-plus-DRxKY1eL.js";import"./_plugin-vue_export-helper-DlAUqK2U.js";const d=o({__name:"index",setup(t){return(a,p)=>(s(),r(e,{processId:"sludge-dewatering",processName:"污泥脱水"}))}});export{d as default};

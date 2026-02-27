@@ -1,0 +1,1 @@
+import{P as e}from"./ProcessPage-Bxm8TP5p.js";import{v as o,z as r,y as t}from"./vue-vendor-rN4MnI8P.js";import"./DeviceMonitorLayout-DiWI89lf.js";import"./element-plus-DRxKY1eL.js";import"./_plugin-vue_export-helper-DlAUqK2U.js";const f=o({__name:"index",setup(s){return(a,i)=>(t(),r(e,{processId:"denitrification-filter",processName:"反硝化深床滤池"}))}});export{f as default};

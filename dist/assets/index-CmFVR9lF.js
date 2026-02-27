@@ -1,0 +1,1 @@
+import{P as e}from"./ProcessPage-Bxm8TP5p.js";import{v as o,z as r,y as s}from"./vue-vendor-rN4MnI8P.js";import"./DeviceMonitorLayout-DiWI89lf.js";import"./element-plus-DRxKY1eL.js";import"./_plugin-vue_export-helper-DlAUqK2U.js";const f=o({__name:"index",setup(a){return(t,p)=>(s(),r(e,{processId:"stage1-aao",processName:"I段AAO"}))}});export{f as default};

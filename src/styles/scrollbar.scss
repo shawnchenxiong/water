@@ -1,0 +1,154 @@
+/**
+ * 全局滚动条样式
+ * 统一的青色科技风滚动条主题
+ */
+
+// 主要内容区域滚动条（较粗，用于主要内容区）
+@mixin scrollbar-primary {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(10, 30, 50, 0.4);
+    border-radius: 4px;
+    margin: 4px 0;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, 
+      rgba(0, 212, 255, 0.6) 0%, 
+      rgba(0, 180, 230, 0.8) 50%,
+      rgba(0, 212, 255, 0.6) 100%
+    );
+    border-radius: 4px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    
+    &:hover {
+      background: linear-gradient(180deg, 
+        rgba(0, 212, 255, 0.8) 0%, 
+        rgba(0, 200, 255, 1) 50%,
+        rgba(0, 212, 255, 0.8) 100%
+      );
+      box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+    }
+    
+    &:active {
+      background: linear-gradient(180deg, 
+        rgba(0, 180, 230, 0.9) 0%, 
+        rgba(0, 160, 200, 1) 50%,
+        rgba(0, 180, 230, 0.9) 100%
+      );
+    }
+  }
+  
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+// 次要滚动条（较细，用于侧边栏等）
+@mixin scrollbar-secondary {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(10, 30, 50, 0.3);
+    border-radius: 3px;
+    margin: 2px 0;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, 
+      rgba(0, 212, 255, 0.5) 0%, 
+      rgba(0, 180, 230, 0.7) 50%,
+      rgba(0, 212, 255, 0.5) 100%
+    );
+    border-radius: 3px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    
+    &:hover {
+      background: linear-gradient(180deg, 
+        rgba(0, 212, 255, 0.7) 0%, 
+        rgba(0, 200, 255, 0.9) 50%,
+        rgba(0, 212, 255, 0.7) 100%
+      );
+      box-shadow: 0 0 6px rgba(0, 212, 255, 0.3);
+    }
+    
+    &:active {
+      background: linear-gradient(180deg, 
+        rgba(0, 180, 230, 0.8) 0%, 
+        rgba(0, 160, 200, 1) 50%,
+        rgba(0, 180, 230, 0.8) 100%
+      );
+    }
+  }
+  
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+// 迷你滚动条（最细，用于小型面板）
+@mixin scrollbar-mini {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(10, 30, 50, 0.2);
+    border-radius: 2px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.4);
+    border-radius: 2px;
+    
+    &:hover {
+      background: rgba(0, 212, 255, 0.6);
+      box-shadow: 0 0 4px rgba(0, 212, 255, 0.2);
+    }
+    
+    &:active {
+      background: rgba(0, 180, 230, 0.8);
+    }
+  }
+}
+
+// Firefox 滚动条样式
+@mixin scrollbar-firefox {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 212, 255, 0.6) rgba(10, 30, 50, 0.4);
+}
+
+// 通用滚动条样式类
+.scrollbar-primary {
+  @include scrollbar-primary;
+  @include scrollbar-firefox;
+}
+
+.scrollbar-secondary {
+  @include scrollbar-secondary;
+  @include scrollbar-firefox;
+}
+
+.scrollbar-mini {
+  @include scrollbar-mini;
+  @include scrollbar-firefox;
+}
+
+// 隐藏滚动条但保持功能
+.scrollbar-hidden {
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE 10+
+  
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Edge
+  }
+}
+
