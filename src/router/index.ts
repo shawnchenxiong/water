@@ -29,6 +29,24 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/scada/editor',
+    name: 'ScadaEditor',
+    component: () => import('@/pages/scada/editor/index.vue'),
+    meta: {
+      title: 'Scada编辑器',
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/scada/preview',
+    name: 'ScadaPreview',
+    component: () => import('@/pages/scada/preview/index.vue'),
+    meta: {
+      title: 'Scada预览器',
+      requiresAuth: false,
+    },
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/404',
   },
@@ -50,7 +68,7 @@ router.beforeEach((to, _from, next) => {
   const requiresAuth = to.meta.requiresAuth !== false
 
   // 白名单：不需要登录的页面
-  const whiteList = ['/login', '/404']
+  const whiteList = ['/login', '/404', '/scada/editor', '/scada/preview']
 
   if (whiteList.includes(to.path)) {
     // 白名单页面，直接通过

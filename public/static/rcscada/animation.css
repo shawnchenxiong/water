@@ -1,0 +1,313 @@
+/* pip-das间隔-速度 如下 间隔1 动画速度0.1s */
+.pip-1-0_1 {
+    stroke-dasharray: 1;
+    animation: pip_dash_1 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_1 {
+    to {
+        /* dash 的 -2 倍 */
+        stroke-dashoffset: -2;
+    }
+}
+
+.pip-2-0_1 {
+    stroke-dasharray: 2;
+    animation: pip_dash_2 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_2 {
+    to {
+        stroke-dashoffset: -4;
+    }
+}
+
+.pip-3-0_1 {
+    stroke-dasharray: 3;
+    animation: pip_dash_3 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_3 {
+    to {
+        stroke-dashoffset: -6;
+    }
+}
+
+.pip-4-0_1 {
+    stroke-dasharray: 4;
+    animation: pip_dash_4 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_4 {
+    to {
+        stroke-dashoffset: -8;
+    }
+}
+
+.pip-5-0_1 {
+    stroke-dasharray: 5;
+    animation: pip_dash_5 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_5 {
+    to {
+        stroke-dashoffset: -10;
+    }
+}
+
+.pip-6-0_1 {
+    stroke-dasharray: 6;
+    animation: pip_dash_6 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_6 {
+    to {
+        stroke-dashoffset: -12;
+    }
+}
+
+.pip-7-0_1 {
+    stroke-dasharray: 7;
+    animation: pip_dash_7 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_7 {
+    to {
+        stroke-dashoffset: -14;
+    }
+}
+
+.pip-8-0_1 {
+    stroke-dasharray: 8;
+    animation: pip_dash_8 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_8 {
+    to {
+        stroke-dashoffset: -16;
+    }
+}
+
+.pip-9-0_1 {
+    stroke-dasharray: 9;
+    animation: pip_dash_9 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_9 {
+    to {
+        stroke-dashoffset: -18;
+    }
+}
+
+.pip-10-0_1 {
+    stroke-dasharray: 10;
+    animation: pip_dash_10 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_10 {
+    to {
+        stroke-dashoffset: -20;
+    }
+}
+
+.pip-11-0_1 {
+    stroke-dasharray: 11;
+    animation: pip_dash_11 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_11 {
+    to {
+        stroke-dashoffset: -22;
+    }
+}
+
+.pip-12-0_1 {
+    stroke-dasharray: 12;
+    animation: pip_dash_12 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_12 {
+    to {
+        stroke-dashoffset: -24;
+    }
+}
+
+.pip-13-0_1 {
+    stroke-dasharray: 13;
+    animation: pip_dash_13 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_13 {
+    to {
+        stroke-dashoffset: -26;
+    }
+}
+
+.pip-14-0_1 {
+    stroke-dasharray: 14;
+    animation: pip_dash_14 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_14 {
+    to {
+        stroke-dashoffset: -28;
+    }
+}
+
+.pip-15-0_1 {
+    stroke-dasharray: 15;
+    animation: pip_dash_15 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_15 {
+    to {
+        stroke-dashoffset: -30;
+    }
+}
+
+.pip-16-0_1 {
+    stroke-dasharray: 16;
+    animation: pip_dash_16 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_16 {
+    to {
+        stroke-dashoffset: -32;
+    }
+}
+
+.pip-17-0_1 {
+    stroke-dasharray: 17;
+    animation: pip_dash_17 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_17 {
+    to {
+        stroke-dashoffset: -34;
+    }
+}
+
+.pip-18-0_1 {
+    stroke-dasharray: 18;
+    animation: pip_dash_18 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_18 {
+    to {
+        stroke-dashoffset: -36;
+    }
+}
+
+.pip-19-0_1 {
+    stroke-dasharray: 19;
+    animation: pip_dash_19 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_19 {
+    to {
+        stroke-dashoffset: -38;
+    }
+}
+
+.pip-20-0_1 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 0.1s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-0_2 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 0.2s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-0_4 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 0.4s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-0_6 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 0.6s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-0_8 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 0.8s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-1_0 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 1s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-1_2 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 1.2s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-1_4 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 1.4s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-1_6 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 1.6s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-1_8 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 1.8s linear;
+    animation-iteration-count: infinite;
+}
+
+.pip-20-2_0 {
+    stroke-dasharray: 20;
+    animation: pip_dash_20 2.0s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pip_dash_20 {
+    to {
+        stroke-dashoffset: -40;
+    }
+}
+
+.flow {
+    stroke-dasharray: 32;
+    animation: dash 0.5s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -64;
+    }
+}

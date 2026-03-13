@@ -17,6 +17,7 @@ declare module 'vue' {
     DiagnosisCard: typeof import('./components/common/DiagnosisCard.vue')['default']
     DiagnosisHistoryDialog: typeof import('./components/common/DiagnosisHistoryDialog.vue')['default']
     DiagnosisScoreDisplay: typeof import('./components/common/DiagnosisScoreDisplay.vue')['default']
+    Editor: typeof import('./components/editor/index.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']

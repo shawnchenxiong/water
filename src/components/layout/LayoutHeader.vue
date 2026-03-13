@@ -396,7 +396,9 @@ import { ElMessageBox, ElMessage } from 'element-plus'
 import { Message, ArrowRight, HomeFilled, Setting, Bell, ArrowDown, Menu as MenuIcon, Close, SwitchButton, OfficeBuilding } from '@element-plus/icons-vue'
 import MessageCenter from '@/components/common/MessageCenter.vue'
 import { getMessageStatistics } from '@/api/common/messageCenterApi'
-import { pvMenuList,esMenuList } from './menu'
+import { getScadaList } from '@/api/scadaApi'
+import { pvMenuList, esMenuList } from './menu'
+import { getAllMonitorList, transformToMenuItems, type ProcessMenuItem } from '@/api/monitorApi'
 
 const router = useRouter()
 const route = useRoute()
@@ -465,16 +467,83 @@ const setWrapperRef = (id: string, el: any) => {
   }
 }
 
+// 获取服务器组态列表（一期 SCADA 菜单）
+const scadaMenus = ref<any[]>([])
+const fetchScadaList = async () => {
+  try {
+    const res = await getScadaList()
+    if (res.data && (res.data.code === 0 || res.data.code === 200 || res.data.success)) {
+      scadaMenus.value = res.data.data || res.data.result || []
+    }
+  } catch (error) {
+    console.error('获取组态列表失败:', error)
+  }
+}
+
+// ==================== 二期工艺流程动态菜单 ====================
+/** 后端返回的二期工艺流程菜单项 */
+const esMonitorMenus = ref<ProcessMenuItem[]>([])
+
+/**
+ * 从后端加载二期工艺流程菜单
+ * 调用 getAllMonitorList 接口获取树形数据，转换为菜单项
+ */
+const fetchEsMonitorMenu = async () => {
+  try {
+    const treeData = await getAllMonitorList()
+    esMonitorMenus.value = transformToMenuItems(treeData)
+    console.log('[LayoutHeader] 二期工艺流程菜单加载完成:', esMonitorMenus.value.length, '个一级菜单')
+  } catch (error) {
+    console.error('[LayoutHeader] 加载二期工艺流程菜单失败:', error)
+  }
+}
+
 // 菜单结构 - 根据当前系统类型选择菜单
 const menuList = computed(() => {
+  let baseList: any[] = []
   if (systemStore.isPVSystem) {
-    return pvMenuList
+    baseList = pvMenuList
   } else if (systemStore.isESSystem) {
-    return esMenuList
+    baseList = esMenuList
   } else {
-    // 默认返回储能系统菜单
-    return esMenuList
+    // 默认返回一期系统菜单
+    baseList = pvMenuList
   }
+  
+  // 深拷贝，避免修改原始数据
+  const finalMenu = JSON.parse(JSON.stringify(baseList))
+  
+  // === 二期系统：注入后端返回的工艺流程动态菜单 ===
+  if (systemStore.isESSystem && esMonitorMenus.value.length > 0) {
+    for (const menu of finalMenu) {
+      if (menu.id === 'es-monitor') {
+        // 用后端数据替换空的 children
+        menu.children = JSON.parse(JSON.stringify(esMonitorMenus.value))
+        break
+      }
+    }
+  }
+  
+  // === 一期系统：追加 SCADA 组态菜单（逻辑不变） ===
+  if (systemStore.isPVSystem && scadaMenus.value.length > 0) {
+    for (const menu of finalMenu) {
+      if (menu.id === 'pv-monitor') {
+        if (!menu.children) menu.children = []
+        scadaMenus.value.forEach((scada: any) => {
+          menu.children.push({
+            id: `scada-${scada.id}`,
+            name: scada.name,
+            path: `/pv/monitor/scada/${scada.id}?templeteId=${scada.templeteId || ''}`
+          })
+        })
+        break
+      }
+    }
+  }
+  
+  // removed scada addition for es system
+  
+  return finalMenu
 })
 
 // 动态计算第三级菜单
@@ -547,6 +616,13 @@ const handleSystemSwitch = (systemType: 'pv' | 'es') => {
 // 根据当前路由更新菜单激活状态
 const updateMenuState = () => {
   const currentPath = route.path
+
+  // 同步系统状态（根据路径自动切换一期/二期）
+  if (currentPath.startsWith('/pv') && !systemStore.isPVSystem) {
+    systemStore.setCurrentSystem('pv')
+  } else if (currentPath.startsWith('/es') && !systemStore.isESSystem) {
+    systemStore.setCurrentSystem('es')
+  }
   
   // 特殊处理综合信息
   if (currentPath.includes('/dashboard')) {
@@ -572,20 +648,44 @@ const updateMenuState = () => {
   for (const topMenu of menuList.value) {
     if (topMenu.children) {
       for (const secondMenu of topMenu.children) {
-        // 检查二级菜单
-        if (secondMenu.path === currentPath) {
-          activeSecondMenu.value = secondMenu.id
-          activeThirdMenu.value = ''
-          return
+        // 检查二级菜单（忽略 query 比较）
+        // 注意：动态菜单中的分组节点可能没有 path
+        if (secondMenu.path) {
+          try {
+            const pathObj = new URL('http://dummy' + secondMenu.path)
+            if (pathObj.pathname === currentPath) {
+              activeSecondMenu.value = secondMenu.id
+              activeThirdMenu.value = ''
+              return
+            }
+          } catch {
+            // path 格式异常时直接字符串比较
+            if (secondMenu.path === currentPath) {
+              activeSecondMenu.value = secondMenu.id
+              activeThirdMenu.value = ''
+              return
+            }
+          }
         }
         
         // 检查三级菜单
         if (secondMenu.children) {
           for (const thirdMenu of secondMenu.children) {
-            if (thirdMenu.path === currentPath) {
-              activeSecondMenu.value = secondMenu.id
-              activeThirdMenu.value = thirdMenu.id
-              return
+            if (thirdMenu.path) {
+              try {
+                const pathObj = new URL('http://dummy' + thirdMenu.path)
+                if (pathObj.pathname === currentPath) {
+                  activeSecondMenu.value = secondMenu.id
+                  activeThirdMenu.value = thirdMenu.id
+                  return
+                }
+              } catch {
+                if (thirdMenu.path === currentPath) {
+                  activeSecondMenu.value = secondMenu.id
+                  activeThirdMenu.value = thirdMenu.id
+                  return
+                }
+              }
             }
           }
         }
@@ -640,20 +740,30 @@ const handleCommand = (command: string) => {
   if (command === 'logout') {
     logout()
   } else {
+    // command 可能带 query，直接 push
     router.push(command)
   }
 }
 
-// 判断路径是否激活
+// 判断路径是否激活（忽略 query 比较）
 const isActivePath = (path?: string) => {
   if (!path) return false
-  return route.path === path
+  const pathObj = new URL('http://dummy' + path)
+  return route.path === pathObj.pathname
 }
 
 // 判断分组是否激活
 const isActiveGroup = (group: any) => {
   if (!group || !group.children) return false
-  return group.children.some((g: any) => g.path === route.path)
+  return group.children.some((g: any) => {
+    if (!g.path) return false
+    try {
+      const pathObj = new URL('http://dummy' + g.path)
+      return pathObj.pathname === route.path
+    } catch {
+      return g.path === route.path
+    }
+  })
 }
 
 // 回到首页
@@ -816,6 +926,8 @@ onMounted(() => {
   // 从存储恢复系统设置
   systemStore.restoreFromStorage()
   
+  fetchScadaList()
+  fetchEsMonitorMenu() // 加载二期工艺流程动态菜单
   updateMenuState()
   loadUnreadMessageCount()
   

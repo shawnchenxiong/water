@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../ant-design-vue-jeecg"
+		},
+		{
+			"path": "../rc-scada/rceditor-vue3"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

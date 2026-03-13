@@ -95,7 +95,7 @@ export function getImportUrl(): string {
 export function getDesignUrl(deviceId: number): string {
   const token = localStorage.getItem('token')
   const tenantId = localStorage.getItem('tenantId') || '1'
-  return `${import.meta.env.VITE_APP_RCSCADA_API}/editor?deviceId=${deviceId}&tt=${token}&tenantId=${tenantId}`
+  return `${window.location.origin}${window.location.pathname}#/scada/editor?deviceId=${deviceId}&tt=${token}&tenantId=${tenantId}`
 }
 
 /**
@@ -104,6 +104,6 @@ export function getDesignUrl(deviceId: number): string {
 export function getPreviewUrl(deviceId: number): string {
   const token = localStorage.getItem('token')
   const tenantId = localStorage.getItem('tenantId') || '1'
-  return `${import.meta.env.VITE_APP_RCSCADA_API}/preview?deviceId=${deviceId}&tt=${token}&tenantId=${tenantId}`
+  return `${window.location.origin}${window.location.pathname}#/scada/preview?deviceId=${deviceId}&tt=${token}&tenantId=${tenantId}`
 }
 

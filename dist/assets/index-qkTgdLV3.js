@@ -1,1 +1,0 @@
-import{P as o}from"./ProcessPage-Bxm8TP5p.js";import{v as e,z as r,y as s}from"./vue-vendor-rN4MnI8P.js";import"./DeviceMonitorLayout-DiWI89lf.js";import"./element-plus-DRxKY1eL.js";import"./_plugin-vue_export-helper-DlAUqK2U.js";const f=e({__name:"index",setup(t){return(p,a)=>(s(),r(o,{processId:"blower-room",processName:"鼓风机房"}))}});export{f as default};

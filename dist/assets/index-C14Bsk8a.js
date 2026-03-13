@@ -1,1 +1,0 @@
-import{P as e}from"./ProcessPage-Bxm8TP5p.js";import{v as r,z as o,y as t}from"./vue-vendor-rN4MnI8P.js";import"./DeviceMonitorLayout-DiWI89lf.js";import"./element-plus-DRxKY1eL.js";import"./_plugin-vue_export-helper-DlAUqK2U.js";const f=r({__name:"index",setup(s){return(p,a)=>(t(),o(e,{processId:"pre-treatment",processName:"预处理"}))}});export{f as default};

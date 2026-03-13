@@ -10,18 +10,79 @@
     <div class="login-box">
       <h2 class="login-title">用户登录</h2>
       
-      
-      <div class="demo-login-wrapper">
-        <el-button type="primary" class="login-btn" size="large" @click="handleDemoLogin('engineer')">
-          工程师 (Engineer)
-        </el-button>
-        <el-button type="success" class="login-btn" size="large" style="background-color: #67c23a; margin-top: 20px" @click="handleDemoLogin('user')">
-          用 户 (User)
-        </el-button>
-        <el-button type="info" class="login-btn" size="large" style="background-color: #909399; margin-top: 20px" @click="handleDemoLogin('guest')">
-          访 客 (Guest)
-        </el-button>
-      </div>
+      <el-form
+        ref="formRef"
+        :model="loginForm"
+        :rules="rules"
+        class="login-form"
+        @keyup.enter="handleLogin"
+      >
+        <el-form-item prop="username">
+          <el-input
+            v-model="loginForm.username"
+            placeholder="请输入用户名或邮箱"
+            size="large"
+            clearable
+          >
+            <template #prefix>
+              <el-icon><User /></el-icon>
+            </template>
+          </el-input>
+        </el-form-item>
+
+        <el-form-item prop="password">
+          <el-input
+            v-model="loginForm.password"
+            type="password"
+            placeholder="请输入密码"
+            size="large"
+            clearable
+            show-password
+          >
+            <template #prefix>
+              <el-icon><Lock /></el-icon>
+            </template>
+          </el-input>
+        </el-form-item>
+
+        <el-form-item prop="captcha">
+          <div class="captcha-container">
+            <el-input
+              v-model="loginForm.captcha"
+              placeholder="请输入验证码"
+              size="large"
+              class="captcha-input"
+              clearable
+            >
+              <template #prefix>
+                <el-icon><Picture /></el-icon>
+              </template>
+            </el-input>
+            <div class="captcha-image-wrapper" @click="handleChangeCheckCode">
+              <img v-if="requestCodeSuccess" :src="captchaImage" class="captcha-image" alt="验证码" />
+              <div v-else class="captcha-placeholder">
+                <el-icon><Refresh /></el-icon>
+              </div>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item class="remember-item">
+          <el-checkbox v-model="loginForm.rememberMe">记住密码</el-checkbox>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button
+            type="primary"
+            class="login-btn"
+            size="large"
+            :loading="loading"
+            @click="handleLogin"
+          >
+            登 录
+          </el-button>
+        </el-form-item>
+      </el-form>
 
     </div>
 
@@ -43,15 +104,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, h, onMounted } from 'vue'
-import { User, Lock, Warning, Picture, Refresh } from '@element-plus/icons-vue'
-import { ElMessage, ElMessageBox, ElIcon } from 'element-plus'
+import { ref, reactive, onMounted } from 'vue'
+import { User, Lock, Picture, Refresh } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
 import { loginApi, getCaptchaImageApi } from '@/api'
 import LoginSelectTenant from '@/components/common/LoginSelectTenant.vue'
 import { useTenantStore } from '@/stores/tenant'
 import type { LoginResponse } from '@/types/user'
+import { useUserStore } from '@/stores/user'
 
 // Router
 const router = useRouter()
@@ -59,6 +121,7 @@ const route = useRoute()
 
 // Store
 const tenantStore = useTenantStore()
+const userStore = useUserStore()
 
 // 响应式数据
 const loading = ref(false)
@@ -115,6 +178,9 @@ const rules: FormRules = {
 /**
  * 刷新验证码
  */
+onMounted(() => {
+  handleChangeCheckCode()
+})
 const handleChangeCheckCode = async () => {
   try {
     checkKey.value = new Date().getTime()
@@ -131,32 +197,89 @@ const handleChangeCheckCode = async () => {
 }
 
 /**
- * 处理登录成功后的逻辑（保存token和用户信息）
+ * 处理真实登录
  */
+const handleLogin = async () => {
+  if (!formRef.value) return
+  
+  try {
+    const valid = await formRef.value.validate()
+    if (!valid) return
+    
+    loading.value = true
+    
+    const res = await loginApi({
+      username: loginForm.username,
+      password: loginForm.password,
+      captcha: loginForm.captcha,
+      checkKey: checkKey.value,
+      rememberMe: loginForm.rememberMe
+    })
+    
+    // 如果返回值为成功
+    if (res.code === 200 || res.success) {
+      currentLoginResponse.value = res.result
+      
+      // 显示多租户选择对话框
+      if (loginSelectRef.value) {
+         loginSelectRef.value.show(res.result, loginForm.username)
+      }
+    } else {
+      ElMessage.error(res.message || '登录失败')
+      handleChangeCheckCode()
+    }
+  } catch (error: any) {
+    console.error('登录异常:', error)
+    ElMessage.error(error.message || '登录失败，请检查网络或联系管理员')
+    handleChangeCheckCode()
+  } finally {
+    loading.value = false
+  }
+}
 
-const handleDemoLogin = (role: string) => {
-  const roleMap: Record<string, { username: string, realname: string, tenantName: string }> = {
-    engineer: { username: 'admin', realname: '工程师', tenantName: '高级权限' },
-    user: { username: 'user', realname: '用户', tenantName: '标准权限' },
-    guest: { username: 'guest', realname: '访客', tenantName: '只读权限' }
+/**
+ * 租户选择成功回调
+ */
+const handleTenantSelectSuccess = (tenantId: number, tenantName: string) => {
+  const loginResult = currentLoginResponse.value
+  if (!loginResult) return
+  
+  // 保存 Token 等信息
+  localStorage.setItem('token', loginResult.token || '')
+  localStorage.setItem('isLoggedIn', 'true')
+  localStorage.setItem('userInfo', JSON.stringify(loginResult.userInfo || {}))
+  localStorage.setItem('username', loginForm.username)
+  
+  // 更新 Pinia状态
+  if (loginResult.token) {
+    userStore.token = loginResult.token
+  }
+  userStore.userInfo = loginResult.userInfo || null
+  
+  // 保存到 TenantStore
+  tenantStore.saveTenant(tenantId, tenantName)
+  
+  if (loginForm.rememberMe) {
+    localStorage.setItem('rememberedUsername', loginForm.username)
+  } else {
+    localStorage.removeItem('rememberedUsername')
   }
   
-  const mockUserInfo = roleMap[role];
-  
-  localStorage.setItem('token', 'demo-token-' + role)
-  localStorage.setItem('isLoggedIn', 'true')
-  localStorage.setItem('userInfo', JSON.stringify(mockUserInfo))
-  localStorage.setItem('username', mockUserInfo.username)
-  
-  tenantStore.saveTenant(role === 'engineer' ? 1 : role === 'user' ? 2 : 3, mockUserInfo.tenantName)
-  
-  ElMessage.success('欢迎体验：' + mockUserInfo.realname)
+  ElMessage.closeAll()
+  ElMessage({
+    message: '登录成功',
+    type: 'success',
+    showClose: true,
+    grouping: true,
+    duration: 3000
+  })
   
   const redirectPath = (route.query.redirect as string) || '/pv/dashboard'
   setTimeout(() => {
     router.push(redirectPath)
   }, 300)
 }
+
 </script>
 
 

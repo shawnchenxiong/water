@@ -68,6 +68,12 @@ export const pvRouter = {
       component: () => import('@/pages/pv/monitor/blower-room/index.vue'),
       meta: { title: '鼓风机房', requiresAuth: true, breadcrumb: ['工艺流程', '鼓风机房'] },
     },
+    {
+      path: 'monitor/scada/:id',
+      name: 'PvMonitorScadaPreview',
+      component: () => import('@/pages/pv/monitor/scada-preview/index.vue'),
+      meta: { title: '工艺流程组态', requiresAuth: true, breadcrumb: ['工艺流程', '工艺流程组态'] },
+    },
     // 智能分析模块
     // 趋势分析模块
     {

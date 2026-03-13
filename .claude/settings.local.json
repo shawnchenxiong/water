@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:8419nx9771pm.vicp.fun)",
+      "Bash(curl -s -k \"http://8419nx9771pm.vicp.fun:43808/jeecg-boot/api/operation-logs/getAllMonitorList\" 2>/dev/null | head -c 5000)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npx vue-tsc:*)",
+      "Bash(npx vite:*)"
+    ]
+  }
+}

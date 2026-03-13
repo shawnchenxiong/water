@@ -63,6 +63,12 @@ export const pvMenuList = [
   },
 ]
 
+/**
+ * 鹤问湖二期工厂菜单
+ *
+ * 工艺流程（es-monitor）的子菜单在运行时由后端 API 动态填充，
+ * 这里只保留空的占位结构。其他模块为静态菜单。
+ */
 export const esMenuList = [
   {
     id: 'es-dashboard',
@@ -72,88 +78,49 @@ export const esMenuList = [
   {
     id: 'es-monitor',
     name: '工艺流程',
-    children: [
-      { id: 'es-station-overview', name: '电站概览', path: '/es/monitor/station-overview' },
-      { id: 'es-electrical-monitor', name: '电气监视', path: '/es/monitor/electrical' },
-      {
-        id: 'es-device-monitor',
-        name: '设备监视',
-        children: [
-          { id: 'es-battery-overview', name: '电池总览', path: '/es/monitor/device/battery-overview' },
-          { id: 'es-battery-array', name: '电池阵列', path: '/es/monitor/device/battery-array' },
-          { id: 'es-battery-cluster', name: '电池簇', path: '/es/monitor/device/battery-cluster' },
-          { id: 'es-battery-module', name: '电池模块', path: '/es/monitor/device/battery-module' },
-          { id: 'es-pcs', name: 'PCS', path: '/es/monitor/device/pcs' },
-          { id: 'es-box-transformer', name: '箱变', path: '/es/monitor/device/box-transformer' },
-          { id: 'es-electric-meter', name: '电能表', path: '/es/monitor/device/electric-meter' },
-          { id: 'es-secondary-equipment', name: '二次设备', path: '/es/monitor/device/secondary-equipment' },
-        ]
-      },
-      {
-        id: 'es-ai-monitor',
-        name: 'AI监视',
-        children: [
-          { id: 'es-ai-recognition-result', name: 'AI识别结果', path: '/es/monitor/ai/recognition-result' }
-        ]
-      },
-      {
-        id: 'es-video-monitor',
-        name: '视频监视',
-        children: [
-          { id: 'es-video-browsing', name: '视频浏览', path: '/es/monitor/video/browsing' },
-          { id: 'es-video-query', name: '录像查询', path: '/es/monitor/video/query' },
-          { id: 'es-video-playback', name: '录像回放', path: '/es/monitor/video/playback' },
-          { id: 'es-video-patrol', name: '视频巡检', path: '/es/monitor/video/patrol' },
-          { id: 'es-preset-patrol', name: '预置位巡检', path: '/es/monitor/video/preset-patrol' },
-        ]
-      }
-    ]
+    // children 在运行时由 LayoutHeader 调用 monitorApi 动态填充
+    children: [] as any[]
   },
   {
     id: 'es-analysis',
-    name: '智能分析',
+    name: '趋势分析',
     children: [
-      { id: 'es-backward-cell', name: '落后单体分析', path: '/es/analysis/backward-cell' },
-      { id: 'es-statistics-report', name: '统计报表', path: '/es/analysis/statistics-report' }
-    ]
+      { id: 'es-data-trend-query', name: '数据趋势查询', path: '/es/analysis/data-trend-query' },
+      { id: 'es-energy-consumption', name: '能耗数据分析', path: '/es/analysis/energy-consumption' },
+    ],
   },
   {
-    id: 'es-alarm',
-    name: '智能告警',
+    id: 'es-diagnosis',
+    name: '告警分析',
     children: [
-      { id: 'es-alarm-overview', name: '告警概览', path: '/es/alarm/overview' },
-      { id: 'es-realtime-alarm', name: '实时告警', path: '/es/alarm/realtime' },
-      { id: 'es-history-alarm', name: '历史告警', path: '/es/alarm/history' },
-      { id: 'es-alarm-shield', name: '告警屏蔽', path: '/es/alarm/shield' },
-      { id: 'es-fault-library', name: '故障库', path: '/es/alarm/fault-library' }
-    ]
+      { id: 'es-alarm-overview', name: '告警概览', path: '/es/diagnosis/alarm-overview' },
+      { id: 'es-alarm-realtime', name: '实时告警', path: '/es/diagnosis/alarm-realtime' },
+      { id: 'es-alarm-history', name: '历史告警', path: '/es/diagnosis/alarm-history' },
+      { id: 'es-alarm-rules', name: '告警规则', path: '/es/diagnosis/alarm-rules' },
+      { id: 'es-alarm-statistics', name: '告警统计', path: '/es/diagnosis/alarm-statistics' },
+    ],
   },
   {
     id: 'es-maintenance',
-    name: '智能运维',
+    name: '报表查询',
     children: [
-      {
-        id: 'es-ai-patrol',
-        name: 'AI巡检',
-        children: [
-          { id: 'es-ai-patrol-monitor', name: '巡检监控', path: '/es/maintenance/ai-patrol/monitor' },
-          { id: 'es-ai-patrol-records', name: '巡检记录', path: '/es/maintenance/ai-patrol/records' },
-          { id: 'es-ai-patrol-tasks', name: '任务管理', path: '/es/maintenance/ai-patrol/tasks' }
-        ]
-      },
-      {
-        id: 'es-mobile-patrol',
-        name: '移动巡检',
-        children: [
-          { id: 'es-mobile-patrol-records', name: '巡检记录', path: '/es/maintenance/mobile-patrol/records' },
-          { id: 'es-mobile-patrol-issues', name: '巡检问题', path: '/es/maintenance/mobile-patrol/issues' },
-          { id: 'es-mobile-patrol-statistics', name: '巡检统计', path: '/es/maintenance/mobile-patrol/statistics' }
-        ]
-      },
-      { id: 'es-defect-management', name: '缺陷管理', path: '/es/maintenance/defect-management' },
-      { id: 'es-maintenance-plan', name: '运维计划', path: '/es/maintenance/plan' },
-      { id: 'es-work-order', name: '工单管理', path: '/es/maintenance/work-order' },
-      { id: 'es-knowledge-base', name: '知识库', path: '/es/maintenance/knowledge-base' }
-    ]
-  }
+      { id: 'es-report-statistics', name: '统计报表', path: '/es/report/statistics' },
+      { id: 'es-report-custom', name: '自定义报表', path: '/es/report/custom' },
+    ],
+  },
+  {
+    id: 'es-user-management',
+    name: '用户管理',
+    path: '/es/user-management'
+  },
+  {
+    id: 'es-system-management',
+    name: '系统管理',
+    children: [
+      { id: 'es-sys-message-center', name: '消息中心', path: '/es/system/message-center' },
+      { id: 'es-sys-notifications', name: '通知管理', path: '/es/system/notifications' },
+      { id: 'es-sys-settings', name: '系统设置', path: '/es/system/settings' },
+      { id: 'es-sys-operation-log', name: '操作记录', path: '/es/system/operation-log' },
+    ],
+  },
 ];

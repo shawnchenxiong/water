@@ -1,0 +1,594 @@
+.dv-loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dv-loading .loading-tip {
+    font-size: 15px;
+}
+
+.dv-border-box-1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-1 .border {
+    position: absolute;
+    display: block;
+}
+
+.dv-border-box-1 .right-top {
+    right: 0px;
+    transform: rotateY(180deg);
+}
+
+.dv-border-box-1 .left-bottom {
+    bottom: 0px;
+    transform: rotateX(180deg);
+}
+
+.dv-border-box-1 .right-bottom {
+    right: 0px;
+    bottom: 0px;
+    transform: rotateX(180deg) rotateY(180deg);
+}
+
+.dv-border-box-1 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-2 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-2 .dv-border-svg-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.dv-border-box-2 .dv-border-svg-container>polyline {
+    fill: none;
+    stroke-width: 1;
+}
+
+.dv-border-box-2 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-3 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-3 .dv-border-svg-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.dv-border-box-3 .dv-border-svg-container>polyline {
+    fill: none;
+}
+
+.dv-border-box-3 .dv-bb3-line1 {
+    stroke-width: 3;
+}
+
+.dv-border-box-3 .dv-bb3-line2 {
+    stroke-width: 1;
+}
+
+.dv-border-box-3 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-4 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-4 .dv-reverse {
+    transform: rotate(180deg);
+}
+
+.dv-border-box-4 .dv-border-svg-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.dv-border-box-4 .dv-border-svg-container>polyline {
+    fill: none;
+}
+
+.dv-border-box-4 .sw1 {
+    stroke-width: 1;
+}
+
+.dv-border-box-4 .sw3 {
+    stroke-width: 3px;
+    stroke-linecap: round;
+}
+
+.dv-border-box-4 .dv-bb4-line-1 {
+    stroke-width: 1;
+}
+
+.dv-border-box-4 .dv-bb4-line-2 {
+    stroke-width: 1;
+}
+
+.dv-border-box-4 .dv-bb4-line-3 {
+    stroke-width: 3px;
+    stroke-linecap: round;
+}
+
+.dv-border-box-4 .dv-bb4-line-4 {
+    stroke-width: 3px;
+    stroke-linecap: round;
+}
+
+.dv-border-box-4 .dv-bb4-line-5 {
+    stroke-width: 1;
+}
+
+.dv-border-box-4 .dv-bb4-line-6 {
+    stroke-width: 1;
+}
+
+.dv-border-box-4 .dv-bb4-line-7 {
+    stroke-width: 1;
+}
+
+.dv-border-box-4 .dv-bb4-line-8 {
+    stroke-width: 3px;
+    stroke-linecap: round;
+}
+
+.dv-border-box-4 .dv-bb4-line-9 {
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-dasharray: 100 250;
+}
+
+.dv-border-box-4 .dv-bb4-line-10 {
+    stroke-width: 1;
+    stroke-dasharray: 80 270;
+}
+
+.dv-border-box-4 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-5 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-5 .dv-reverse {
+    transform: rotate(180deg);
+}
+
+.dv-border-box-5 .dv-border-svg-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-5 .dv-border-svg-container>polyline {
+    fill: none;
+}
+
+.dv-border-box-5 .dv-bb5-line-1,
+.dv-border-box-5 .dv-bb5-line-2 {
+    stroke-width: 1;
+}
+
+.dv-border-box-5 .dv-bb5-line-3,
+.dv-border-box-5 .dv-bb5-line-6 {
+    stroke-width: 5;
+}
+
+.dv-border-box-5 .dv-bb5-line-4,
+.dv-border-box-5 .dv-bb5-line-5 {
+    stroke-width: 2;
+}
+
+.dv-border-box-5 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-6 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-6 .dv-border-svg-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-6 .dv-border-svg-container>polyline {
+    fill: none;
+    stroke-width: 1;
+}
+
+.dv-border-box-6 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-7 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-7 .dv-border-svg-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-7 .dv-border-svg-container>polyline {
+    fill: none;
+    stroke-linecap: round;
+}
+
+.dv-border-box-7 .dv-bb7-line-width-2 {
+    stroke-width: 2;
+}
+
+.dv-border-box-7 .dv-bb7-line-width-5 {
+    stroke-width: 5;
+}
+
+.dv-border-box-7 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-8 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-8 .dv-border-svg-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+
+.dv-border-box-8 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-9 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-9 .dv-border-svg-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+
+.dv-border-box-9 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-10 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+
+.dv-border-box-10 .dv-border-svg-container {
+    position: absolute;
+    display: block;
+}
+
+.dv-border-box-10 .right-top {
+    right: 0px;
+    transform: rotateY(180deg);
+}
+
+.dv-border-box-10 .left-bottom {
+    bottom: 0px;
+    transform: rotateX(180deg);
+}
+
+.dv-border-box-10 .right-bottom {
+    right: 0px;
+    bottom: 0px;
+    transform: rotateX(180deg) rotateY(180deg);
+}
+
+.dv-border-box-10 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-11 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-11 .dv-border-svg-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.dv-border-box-11 .dv-border-svg-container>polyline {
+    fill: none;
+    stroke-width: 1;
+}
+
+.dv-border-box-11 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-12 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-12 .dv-border-svg-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.dv-border-box-12 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-13 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-border-box-13 .dv-border-svg-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.dv-border-box-13 .border-box-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-decoration-1 {
+    width: 100%;
+    height: 100%;
+}
+.dv-decoration-1 svg {
+    transform-origin: left top;
+}
+
+.dv-decoration-2 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.dv-decoration-3 {
+    width: 100%;
+    height: 100%;
+}
+
+.dv-decoration-3 svg {
+    transform-origin: left top;
+}
+
+.dv-decoration-4 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+}
+
+.dv-decoration-4 .container {
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    flex: 1;
+}
+
+.dv-decoration-4 .normal {
+    animation: dv-decoration-4-ani-height ease-in-out infinite;
+    left: 50%;
+    margin-left: -2px;
+}
+
+.dv-decoration-4 .reverse {
+    animation: dv-decoration-4-ani-width ease-in-out infinite;
+    top: 50%;
+    margin-top: -2px;
+}
+
+@keyframes dv-decoration-4-ani-height {
+    0% {
+        height: 0%;
+    }
+
+    70% {
+        height: 100%;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+@keyframes dv-decoration-4-ani-width {
+    0% {
+        width: 0%;
+    }
+
+    70% {
+        width: 100%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.dv-decoration-5 {
+    width: 100%;
+    height: 100%;
+}
+
+.dv-decoration-6 {
+    width: 100%;
+    height: 100%;
+
+}
+.dv-decoration-6 svg {
+    transform-origin: left top;
+}
+
+.dv-decoration-7 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.dv-decoration-8 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.dv-decoration-9 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dv-decoration-9 svg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transform-origin: left top;
+}
+
+.dv-decoration-10 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.dv-decoration-11 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.dv-decoration-11 .decoration-content {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dv-decoration-12 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.dv-decoration-12 .decoration-content {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.usrSidebarControlsContainer .geSidebar .geItem.usr-thumb-small.usr-dvBorderBox:hover .controls-img {
+    content: url("/public/static/rcscada/datav/borderbox_hover.svg");
+}

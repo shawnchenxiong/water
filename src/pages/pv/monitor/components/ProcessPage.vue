@@ -31,6 +31,11 @@
             <el-empty :description="`${currentTitle} 工艺流程图绘制中...`" />
           </div>
         </div>
+        
+        <!-- 右侧实时数据面板 -->
+        <div class="process-data-sidebar">
+          <ProcessDataPanel :processId="processId" />
+        </div>
       </div>
     </template>
   </DeviceMonitorLayout>
@@ -44,6 +49,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import DeviceMonitorLayout from '@/components/layout/DeviceMonitorLayout.vue'
+import ProcessDataPanel from './ProcessDataPanel.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -106,9 +112,10 @@ watch(() => props.processId, () => {})
 <style scoped lang="scss">
 .process-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100%;
   overflow: hidden;
+  gap: 0;
 }
 
 /* ========== 工艺流程图主区域 ========== */
@@ -118,6 +125,12 @@ watch(() => props.processId, () => {})
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* 右侧数据面板 */
+.process-data-sidebar {
+  width: 350px;
+  flex-shrink: 0;
 }
 
 /* 工艺图片容器 */

@@ -44,6 +44,20 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 5173,
       host: true,
+      proxy: {
+        // WebSocket 代理（需要放在 /jeecg-boot 之前，更精确匹配）
+        '/jeecg-boot/websocket': {
+          target: env.VITE_PROXY_WS_TARGET || 'wss://service.ccswkj.cn',
+          changeOrigin: true,
+          ws: true, // 启用 WebSocket 代理
+        },
+        // 代理真实后端API请求，解决跨域问题
+        '/jeecg-boot': {
+          target: env.VITE_PROXY_TARGET || 'https://service.ccswkj.cn',
+          changeOrigin: true,
+          // 不需要 rewrite，因为后端路径就包含 /jeecg-boot 前缀
+        },
+      },
     },
     build: {
       target: 'es2015',

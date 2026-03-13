@@ -41,19 +41,17 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   (response: AxiosResponse) => {
-    // Demo Mode: Mock successful response unconditionally
-    const { data } = response;
-    // Keep it valid if it was actually returning real data (like a local json file)
-    if (data && (data.code === 200 || data.success)) {
-      return data;
+    const { data } = response
+    // 如果返回 code 为 200, 0 或者 success 为 true 视为成功
+    if (data && (data.code === 200 || data.code === 0 || data.code === '200' || data.success)) {
+      return data
     }
-    // Otherwise return a fake success response to prevent failures in UI
-    return { code: 200, success: true, result: data?.result || {}, message: 'Mock Success' };
+    // 拦截特定后端错误并抛出
+    return Promise.reject(new Error(data.message || 'Error'))
   },
   (error) => {
-    console.warn('[Demo Mode] Intercepted network error:', error);
-    // Suppress network errors and return mock success payload
-    return Promise.resolve({ code: 200, success: true, result: {}, message: 'Mock Success (Offline)' });
+    console.error('Response error:', error)
+    return Promise.reject(error)
   }
 )
 
